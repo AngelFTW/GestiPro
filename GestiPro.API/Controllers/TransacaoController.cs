@@ -1,5 +1,4 @@
 using GestiPro.API.DTOs;
-using GestiPro.API.Models;
 using GestiPro.API.Repositories;
 using Microsoft.AspNetCore.Mvc;
 

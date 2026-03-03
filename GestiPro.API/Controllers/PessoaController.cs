@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using GestiPro.API.DTOs;
 using GestiPro.API.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace GestiPro.API.Controllers;
 
@@ -19,7 +13,7 @@ namespace GestiPro.API.Controllers;
 [Route("api/[controller]")]
 public class PessoaController : ControllerBase
 {
-private readonly PessoaRepository _pessoaRepository;
+    private readonly PessoaRepository _pessoaRepository;
 
     public PessoaController(PessoaRepository pessoaRepository)
     {

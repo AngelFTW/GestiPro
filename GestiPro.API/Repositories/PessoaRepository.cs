@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GestiPro.API.Data;
 using GestiPro.API.Models;
 using GestiPro.API.DTOs;
