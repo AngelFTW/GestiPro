@@ -1,0 +1,12 @@
+# Folders
+.vs/
+.vscode/
+bin/
+obj/
+app-keys/
+keys/
+
+# Files
+.env
+*.user
+*.development.json
