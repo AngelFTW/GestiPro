@@ -13,6 +13,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<PessoaRepository>();
 builder.Services.AddScoped<CategoriaRepository>();
 builder.Services.AddScoped<TransacaoRepository>();
+builder.Services.AddScoped<TotaisRepository>();
 
 var app = builder.Build();
 
