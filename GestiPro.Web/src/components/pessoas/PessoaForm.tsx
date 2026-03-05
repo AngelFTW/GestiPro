@@ -2,19 +2,19 @@ import { useEffect, useState } from 'react';
 import type { Pessoa, PessoaRequest } from '../../types/pessoa';
 
 interface Props {
-  // quando a Pessoa vem undefined, é edição
+  // quando a Pessoa vem undefined, é criação
   pessoaEditar?: Pessoa;
   onSalvar: (dados: PessoaRequest) => void;
   onCancelar: () => void;
 }
 
-// Form pra criação e edicção de pessoas
+// Form pra criação e edição de pessoas
 export default function PessoaForm({ pessoaEditar, onSalvar, onCancelar }: Props) {
   const [nome, setNome] = useState('');
   const [idade, setIdade] = useState('');
   const [erro, setErro] = useState('');
 
-  // Preenche os inputs do editar
+  // Preenche os inputs ao editar
   useEffect(() => {
     if (pessoaEditar) {
       setNome(pessoaEditar.nome);
@@ -37,17 +37,14 @@ export default function PessoaForm({ pessoaEditar, onSalvar, onCancelar }: Props
   }
 
   return (
-    <div style={styles.overlay}>
-      <div style={styles.modal}>
-        <h2 style={styles.titulo}>
-          {pessoaEditar ? 'Editar Pessoa' : 'Nova Pessoa'}
-        </h2>
+    <div className="modal-overlay">
+      <div className="modal">
+        <h2>{pessoaEditar ? 'Editar Pessoa' : 'Nova Pessoa'}</h2>
 
         <form onSubmit={handleSubmit}>
-          <div style={styles.campo}>
-            <label style={styles.label}>Nome</label>
+          <div className="form-field">
+            <label>Nome</label>
             <input
-              style={styles.input}
               value={nome}
               onChange={e => setNome(e.target.value)}
               maxLength={200}
@@ -56,10 +53,9 @@ export default function PessoaForm({ pessoaEditar, onSalvar, onCancelar }: Props
             />
           </div>
 
-          <div style={styles.campo}>
-            <label style={styles.label}>Idade</label>
+          <div className="form-field">
+            <label>Idade</label>
             <input
-              style={styles.input}
               type="number"
               value={idade}
               onChange={e => setIdade(e.target.value)}
@@ -69,13 +65,13 @@ export default function PessoaForm({ pessoaEditar, onSalvar, onCancelar }: Props
             />
           </div>
 
-          {erro && <p style={styles.erro}>{erro}</p>}
+          {erro && <p className="form-error">{erro}</p>}
 
-          <div style={styles.botoes}>
-            <button type="button" onClick={onCancelar} style={styles.btnCancelar}>
+          <div className="modal-actions">
+            <button type="button" className="btn btn-outline" onClick={onCancelar}>
               Cancelar
             </button>
-            <button type="submit" style={styles.btnSalvar}>
+            <button type="submit" className="btn btn-primary">
               Salvar
             </button>
           </div>
@@ -84,36 +80,3 @@ export default function PessoaForm({ pessoaEditar, onSalvar, onCancelar }: Props
     </div>
   );
 }
-
-const styles: Record<string, React.CSSProperties> = {
-  overlay: {
-    position: 'fixed', inset: 0,
-    background: 'rgba(0,0,0,0.45)',
-    display: 'flex', alignItems: 'center', justifyContent: 'center',
-    zIndex: 100,
-  },
-  modal: {
-    background: '#fff', borderRadius: 10,
-    padding: '2rem', width: 400,
-    boxShadow: '0 4px 24px rgba(0,0,0,0.18)',
-  },
-  titulo: { marginBottom: '1.5rem', fontSize: '1.2rem', fontWeight: 600 },
-  campo: { marginBottom: '1rem', display: 'flex', flexDirection: 'column', gap: 6 },
-  label: { fontWeight: 500, fontSize: '0.9rem', color: '#444' },
-  input: {
-    padding: '0.5rem 0.75rem', borderRadius: 6,
-    border: '1px solid #ccc', fontSize: '1rem', outline: 'none',
-  },
-  erro: { color: '#d32f2f', fontSize: '0.88rem', marginBottom: '0.75rem' },
-  botoes: { display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: '1.5rem' },
-  btnCancelar: {
-    padding: '0.5rem 1.2rem', borderRadius: 6,
-    border: '1px solid #ccc', background: '#f5f5f5',
-    cursor: 'pointer', fontSize: '0.95rem',
-  },
-  btnSalvar: {
-    padding: '0.5rem 1.2rem', borderRadius: 6,
-    border: 'none', background: '#1976d2', color: '#fff',
-    cursor: 'pointer', fontSize: '0.95rem', fontWeight: 600,
-  },
-};

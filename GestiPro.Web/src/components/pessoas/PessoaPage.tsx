@@ -9,12 +9,14 @@ import {
 import PessoaTable from './PessoaTable';
 import PessoaForm from './PessoaForm';
 
+// Página principal do cadastro de pessoas.
+// Gerencia o estado da lista, abertura do formulário e confirmação de deleção.
 export default function PessoaPage() {
   const [pessoas, setPessoas] = useState<Pessoa[]>([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState('');
 
-  // Edicao pessoa, undefined = criação
+  // Pessoa sendo editada; undefined = formulário em modo criação
   const [pessoaEditando, setPessoaEditando] = useState<Pessoa | undefined>();
   const [formAberto, setFormAberto] = useState(false);
 
@@ -36,7 +38,7 @@ export default function PessoaPage() {
 
   useEffect(() => { carregarPessoas(); }, []);
 
-  // Cria ou atualiza uma pessoa
+  // Salva (cria ou atualiza) conforme se há pessoa sendo editada
   async function handleSalvar(dados: PessoaRequest) {
     try {
       if (pessoaEditando) {
@@ -78,18 +80,18 @@ export default function PessoaPage() {
   }
 
   return (
-    <div style={styles.pagina}>
-      <div style={styles.cabecalho}>
-        <h1 style={styles.titulo}>Pessoas</h1>
-        <button style={styles.btnNovo} onClick={abrirFormCriacao}>
+    <>
+      <div className="page-header">
+        <h1>Pessoas</h1>
+        <button className="btn btn-primary" onClick={abrirFormCriacao}>
           + Nova Pessoa
         </button>
       </div>
 
-      {erro && <p style={styles.erro}>{erro}</p>}
+      {erro && <div className="alert-error">{erro}</div>}
 
       {carregando ? (
-        <p style={styles.info}>Carregando...</p>
+        <p style={{ color: 'var(--text-muted)' }}>Carregando...</p>
       ) : (
         <PessoaTable
           pessoas={pessoas}
@@ -109,64 +111,29 @@ export default function PessoaPage() {
 
       {/* Modal confirmação de deleção */}
       {pessoaParaDeletar && (
-        <div style={styles.overlay}>
-          <div style={styles.modalConfirm}>
-            <p style={styles.confirmTexto}>
-              Deletar <strong>{pessoaParaDeletar.nome}</strong>?<br />
-              <span style={styles.confirmAviso}>
-                Todas as transações desta pessoa também serão removidas.
-              </span>
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Confirmar exclusão</h2>
+            <p style={{ marginBottom: '0.5rem', lineHeight: 1.6 }}>
+              Deletar <strong>{pessoaParaDeletar.nome}</strong>?
             </p>
-            <div style={styles.confirmBotoes}>
+            <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
+              Todas as transações desta pessoa também serão removidas.
+            </p>
+            <div className="modal-actions">
               <button
-                style={styles.btnCancelar}
+                className="btn btn-outline"
                 onClick={() => setPessoaParaDeletar(null)}
               >
                 Cancelar
               </button>
-              <button style={styles.btnDeletar} onClick={handleDeletar}>
+              <button className="btn btn-danger" onClick={handleDeletar}>
                 Deletar
               </button>
             </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
-
-const styles: Record<string, React.CSSProperties> = {
-  pagina: { maxWidth: 860, margin: '0 auto', padding: '2rem 1.5rem' },
-  cabecalho: {
-    display: 'flex', justifyContent: 'space-between',
-    alignItems: 'center', marginBottom: '1.5rem',
-  },
-  titulo: { fontSize: '1.6rem', fontWeight: 700, color: '#1a1a2e' },
-  btnNovo: {
-    padding: '0.55rem 1.25rem', borderRadius: 7,
-    border: 'none', background: '#1976d2', color: '#fff',
-    cursor: 'pointer', fontSize: '0.95rem', fontWeight: 600,
-  },
-  erro: { color: '#d32f2f', marginBottom: '1rem' },
-  info: { color: '#888' },
-  overlay: {
-    position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.45)',
-    display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100,
-  },
-  modalConfirm: {
-    background: '#fff', borderRadius: 10, padding: '2rem',
-    width: 380, boxShadow: '0 4px 24px rgba(0,0,0,0.18)',
-  },
-  confirmTexto: { fontSize: '1rem', marginBottom: '1.5rem', lineHeight: 1.6 },
-  confirmAviso: { fontSize: '0.88rem', color: '#888' },
-  confirmBotoes: { display: 'flex', justifyContent: 'flex-end', gap: 10 },
-  btnCancelar: {
-    padding: '0.5rem 1.2rem', borderRadius: 6,
-    border: '1px solid #ccc', background: '#f5f5f5', cursor: 'pointer',
-  },
-  btnDeletar: {
-    padding: '0.5rem 1.2rem', borderRadius: 6,
-    border: 'none', background: '#d32f2f', color: '#fff',
-    cursor: 'pointer', fontWeight: 600,
-  },
-};
