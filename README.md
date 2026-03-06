@@ -6,19 +6,20 @@ Sistema de controle de gastos residenciais com cadastro de pessoas, categorias, 
 
 ## Tecnologias
 
-
+```
 Backend   -> .NET 10 / Entity Framework Core
 Banco     -> SQLite
 Frontend  -> React + TypeScript (Vite)
-
+```
 ---
 
 ## Estrutura
 
-
+```
 GestiPro.API/     -> Web API REST
 GestiPro.Tests/   -> Testes unitários (xUnit)
 GestiPro.Web/     -> Frontend React
+```
 
 ---
 
@@ -54,12 +55,12 @@ dotnet test
 
 ## Funcionalidades
 
-- **Pessoas** — cadastro completo (criar, editar, deletar, listar). Ao deletar uma pessoa, todas as suas transações são removidas automaticamente.
-- **Categorias** — criação e listagem. Cada categoria tem uma finalidade: Despesa, Receita ou Ambas.
-- **Transações** — criação e listagem, com as regras:
+- **Pessoas** -> cadastro completo (criar, editar, deletar, listar). Ao deletar uma pessoa, todas as suas transações são removidas automaticamente.
+- **Categorias** -> criação e listagem. Cada categoria tem uma finalidade: Despesa, Receita ou Ambas.
+- **Transações** -> criação e listagem, com as regras:
   - Menores de 18 anos só podem ter transações do tipo Despesa.
   - A categoria deve ser compatível com o tipo da transação.
-- **Totais** — consulta de receitas, despesas e saldo por pessoa e por categoria, com totais gerais consolidados.
+- **Totais** -> consulta de receitas, despesas e saldo por pessoa e por categoria, com totais gerais consolidados.
 
 
 ## Comentários
