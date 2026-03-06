@@ -3,18 +3,23 @@ import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/layout/Navbar';
 import HomePage from './components/layout/HomePage';
 import PessoaPage from './components/pessoas/PessoaPage';
+import CategoriaPage from './components/categorias/CategoriaPage';
+import TransacaoPage from './components/transacoes/TransacaoPage';
+import TotaisPage from './components/totais/TotaisPage';
 import './App.css';
 
-type Page = 'home' | 'pessoas';
-
+type Page = 'home' | 'pessoas' | 'categorias' | 'transacoes' | 'totais';
 
 function AppContent() {
   const [paginaAtiva, setPaginaAtiva] = useState<Page>('home');
 
   function renderPagina() {
     switch (paginaAtiva) {
-      case 'pessoas': return <PessoaPage />;
-      default:        return <HomePage onNavegar={setPaginaAtiva} />;
+      case 'pessoas':    return <PessoaPage />;
+      case 'categorias': return <CategoriaPage />;
+      case 'transacoes': return <TransacaoPage />;
+      case 'totais':     return <TotaisPage />;
+      default:           return <HomePage onNavegar={setPaginaAtiva} />;
     }
   }
 

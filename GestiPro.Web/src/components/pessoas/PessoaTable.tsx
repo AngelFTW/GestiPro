@@ -9,7 +9,7 @@ interface Props {
 // Tabela que lista todas as pessoas cadastradas.
 // Exibe badge "Menor de idade" quando aplicável.
 export default function PessoaTable({ pessoas, onEditar, onDeletar }: Props) {
-  if (pessoas.length === 0) {
+  if (pessoas.length == 0) {
     return <p className="table-empty">Nenhuma pessoa cadastrada.</p>;
   }
 

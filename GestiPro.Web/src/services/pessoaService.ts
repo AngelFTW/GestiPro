@@ -5,7 +5,8 @@ const BASE_URL = '/api/pessoa';
 // Lista todas as pessoas cadastradas
 export async function listarPessoas(): Promise<Pessoa[]> {
   const res = await fetch(BASE_URL);
-  if (!res.ok) throw new Error('Erro ao listar pessoas');
+  if (!res.ok) 
+    throw new Error('Erro ao listar pessoas');
   return res.json();
 }
 
@@ -16,7 +17,8 @@ export async function criarPessoa(dados: PessoaRequest): Promise<Pessoa> {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(dados),
   });
-  if (!res.ok) throw new Error('Erro ao criar pessoa');
+  if (!res.ok) 
+    throw new Error('Erro ao criar pessoa');
   return res.json();
 }
 
@@ -27,11 +29,13 @@ export async function atualizarPessoa(id: number, dados: PessoaRequest): Promise
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(dados),
   });
-  if (!res.ok) throw new Error('Erro ao atualizar pessoa');
+  if (!res.ok) 
+    throw new Error('Erro ao atualizar pessoa');
 }
 
 // Deleta uma pessoa e todas as suas transações
 export async function deletarPessoa(id: number): Promise<void> {
   const res = await fetch(`${BASE_URL}/${id}`, { method: 'DELETE' });
-  if (!res.ok) throw new Error('Erro ao deletar pessoa');
+  if (!res.ok) 
+    throw new Error('Erro ao deletar pessoa');
 }

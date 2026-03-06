@@ -54,7 +54,8 @@ export default function PessoaPage() {
   }
 
   async function handleDeletar() {
-    if (!pessoaParaDeletar) return;
+    if (!pessoaParaDeletar) 
+      return;
     try {
       await deletarPessoa(pessoaParaDeletar.id);
       setPessoaParaDeletar(null);

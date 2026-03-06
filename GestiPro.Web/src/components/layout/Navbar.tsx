@@ -1,6 +1,6 @@
 import { useTheme } from '../../context/ThemeContext';
 
-type Page = 'home' | 'pessoas';
+type Page = 'home' | 'pessoas' | 'categorias' | 'transacoes' | 'totais';
 
 interface Props {
   paginaAtiva: Page;
@@ -8,8 +8,11 @@ interface Props {
 }
 
 const links: { pagina: Page; label: string }[] = [
-  { pagina: 'home', label: 'Início' },
-  { pagina: 'pessoas', label: 'Pessoas' },
+  { pagina: 'home',       label: 'Início' },
+  { pagina: 'pessoas',    label: 'Pessoas' },
+  { pagina: 'categorias', label: 'Categorias' },
+  { pagina: 'transacoes', label: 'Transações' },
+  { pagina: 'totais',     label: 'Totais' },
 ];
 
 // Barra de navegação com links de página e alternador de tema claro/escuro.

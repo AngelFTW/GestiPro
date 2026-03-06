@@ -28,10 +28,14 @@ export default function PessoaForm({ pessoaEditar, onSalvar, onCancelar }: Props
 
     const idadeNum = Number(idade);
 
-    if (!nome.trim()) return setErro('Nome é obrigatório.');
-    if (nome.length > 200) return setErro('Nome deve ter no máximo 200 caracteres.');
-    if (!idade || isNaN(idadeNum) || idadeNum < 0 || idadeNum > 150)
-      return setErro('Idade deve ser um número entre 0 e 150.');
+    if (!nome.trim()) 
+      return setErro('Nome é obrigatório.');
+    if (/\d/.test(nome)) 
+      return setErro('Nome não pode conter números.');
+    if (nome.length > 200) 
+      return setErro('Nome deve ter no máximo 200 caracteres.');
+    if (!idade || isNaN(idadeNum) || idadeNum < 0 || idadeNum > 120)
+      return setErro('Idade deve ser um número entre 0 e 120.');
 
     onSalvar({ nome: nome.trim(), idade: idadeNum });
   }
@@ -60,7 +64,7 @@ export default function PessoaForm({ pessoaEditar, onSalvar, onCancelar }: Props
               value={idade}
               onChange={e => setIdade(e.target.value)}
               min={0}
-              max={150}
+              max={120}
               placeholder="Idade"
             />
           </div>

@@ -17,6 +17,6 @@ public class PessoaRequestDto
     public string Nome { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Idade é obrigatória")]
-    [Range(0, 150, ErrorMessage = "Idade inválida. Verifique.")]
+    [Range(0, 120, ErrorMessage = "Idade inválida. Verifique.")]
     public int Idade { get; set; }
 }
